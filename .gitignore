@@ -1,0 +1,12 @@
+/crossword.html
+/data
+/crossword.app
+/archive
+/build
+dist
+.DS_Store
+.cache
+bower_components
+node_modules
+*.ls.js
+.*.swp

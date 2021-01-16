@@ -1,0 +1,14 @@
+{
+  "name": "crossword",
+  "version": "0.0.1",
+  "main": "crossword.html",
+  "window": {
+    "title": "Crossword Puzzle"
+  },
+  "scripts": {
+    "start": "./crossword.app/Contents/MacOS/nwjs .&"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
