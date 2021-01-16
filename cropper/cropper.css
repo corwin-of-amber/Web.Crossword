@@ -1,0 +1,40 @@
+div#toolbar {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    z-index: 9;
+}
+
+svg.crop-frame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+img.being-cropped {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 100%;
+}
+
+rect:focus {
+    outline: none;
+}
+
+rect.knob {
+    stroke: grey;
+    fill: white;
+}
+
+rect.knob.ui-draggable-dragging {
+    fill: #bbb;
+}
+
+rect.wire {
+    stroke: grey;
+    fill: none;
+}
+

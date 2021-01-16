@@ -1,7 +1,7 @@
 {
   "name": "crossword",
   "version": "0.0.1",
-  "main": "crossword.html",
+  "main": "build/kremlin/index.html",
   "window": {
     "title": "Crossword Puzzle"
   },
@@ -9,6 +9,8 @@
     "start": "./crossword.app/Contents/MacOS/nwjs .&"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.17.1",
+    "jquery": "^3.5.0",
+    "jquery-ui-dist": "^1.12.1"
   }
 }
