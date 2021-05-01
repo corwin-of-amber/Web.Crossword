@@ -209,7 +209,13 @@ $(async () => {
     $(document.body).append(svg);
 
     var esg = new ExtractSquareGrid;
-    $('button[name=crop]').on('click', () => esg.extractFromAndSave(img[0], box));
+    $('button[name=crop]').on('click', async () => {
+        await esg.extractFromAndSave(img[0], box);
+        wins = await new Promise(f => nw.Window.getAll(f));
+        wins[0].focus(); wins[0].reload();
+    });
+
+    $('button[name=reload]').on('click', () => location.reload());
 
     window.addEventListener('beforeunload', () => lastBox.set(box.geom));
 

@@ -1,7 +1,7 @@
 {
   "name": "crossword",
   "version": "0.0.1",
-  "main": "build/kremlin/index.html",
+  "main": "crossword.html",
   "window": {
     "title": "Crossword Puzzle"
   },
@@ -12,5 +12,8 @@
     "express": "^4.17.1",
     "jquery": "^3.5.0",
     "jquery-ui-dist": "^1.12.1"
+  },
+  "app": {
+    "icon": "img/Icon.icns"
   }
 }

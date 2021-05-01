@@ -3,6 +3,8 @@
 /crossword.app
 /archive
 /build
+*.app
+*.icns
 dist
 .DS_Store
 .cache

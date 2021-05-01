@@ -118,9 +118,13 @@ $ ->
       mcell.get k .find 'p' .text v
 
   $ ->
-    $ '#clear' .click ->
+    $ '#reload' .on 'click' -> location.reload!
+
+    $ '#import' .on 'click' -> window.open('/build/kremlin/index.html', 'cropper');
+
+    $ '#clear' .on 'click' ->
       userdata.new!
       $ 'td p' .text ""
 
-    $ '#download' .click -> download!
+    $ '#download' .on 'click' -> download!
 

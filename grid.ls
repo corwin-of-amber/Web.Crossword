@@ -30,7 +30,7 @@ download = ->
   fs = require 'fs'  /* this only works on Node atm */
   new JSZip()
     ..file 'data.json' JSON.stringify {cwdata, userdata}
-    ..file 'birman.png' fs.readFileSync 'data/birman.png'
+    ..file 'birman.jpg' fs.readFileSync 'data/birman.jpg'
     ..generateAsync type: 'blob' .then ->
       saveAs it, "birman-#{datestamp!}.zip"
 
@@ -44,11 +44,12 @@ upload = (fn) ->
       for own k,v of it.userdata
         userdata[k] <<< v
       $ \#crossword .trigger 'got-grid'
-    it.file('birman.png').async('base64').then ->
-      uri = "data:image/png;base64,#{it}"
-      $('.hints').css 'background-image', "url(#{uri})" # no-repeat scroll right -100px 100%"
-    .catch ->
-      console.log it
+    for fn in ['birman.png', 'birman.jpg']
+      it.file(fn)?.async('base64').then ->
+        uri = "data:image/png;base64,#{it}"
+        $('.hints').css 'background-image', "url(#{uri})" # no-repeat scroll right -100px 100%"
+      .catch ->
+        console.log it
 
 
 datestamp = ->

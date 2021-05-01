@@ -25,19 +25,26 @@
       -webkit-user-modify: read-write;
       -moz-user-modify: read-write;
     }
-    body { display: flex; align-items: stretch; height: 100%; }
+    body { margin: 0; display: flex; align-items: stretch; height: 100%; }
+    div.crossword-area {
+      padding: 6px;
+    }
+    table#crossword {
+      margin-bottom: 3px;
+    }
     div.hints {
       background: url(data/birman.jpg);
       background-repeat: no-repeat;
-      background-position: right -80px bottom;
-      background-size: 1500px;
       flex: 1;
+      opacity: 0;
     }
   </style>
   <body>
-    <div>
+    <div class="crossword-area">
       <table id="crossword">
       </table>
+      <button id="reload">Reload</button>
+      <button id="import">Import</button>
       <button id="clear">Clear</button>
       <button id="download">Download</button>
     </div>
@@ -45,5 +52,6 @@
   </body>
   <script src="grid.ls.js"></script>
   <script src="crossword.ls.js"></script>
+  <script src="hints.ls.js"></script>
   <script src="web-server.ls.js"></script>
 </html>
