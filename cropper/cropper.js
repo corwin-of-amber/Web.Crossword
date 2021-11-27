@@ -143,11 +143,12 @@ class ExtractSquareGrid {
         return eval('(' + txt.replace(/#.*/g, '') + ')');  // not quite JSON :/
     }
 
-    squares(filename, boxGeom) {
+    squares(filename, boxGeom, geom) {
         const child_process = require('child_process'),
-              box = boxGeom ? [`--box=${boxGeom.x},${boxGeom.y}:${boxGeom.w}x${boxGeom.h}`] : [];
+              box = boxGeom ? [`--box=${boxGeom.x},${boxGeom.y}:${boxGeom.w}x${boxGeom.h}`] : [],
+              gm = geom ? [`--geom=${geom}`] : [];
         var res = child_process.spawnSync('python',
-            ['cropper/squares.py', filename, ...box], {encoding: 'utf-8'});
+            ['cropper/squares.py', filename, ...box, ...gm], {encoding: 'utf-8'});
         if (res.status != 0)
             throw new Error(res.stderr);
         else
@@ -210,12 +211,17 @@ $(async () => {
 
     var esg = new ExtractSquareGrid;
     $('button[name=crop]').on('click', async () => {
-        await esg.extractFromAndSave(img[0], box);
+        await esg.extractFromAndSave(img[0], box, geom);
         wins = await new Promise(f => nw.Window.getAll(f));
         wins[0].focus(); wins[0].reload();
     });
 
     $('button[name=reload]').on('click', () => location.reload());
+
+    var geom, sel = $('select[name=geom]'),
+        _updateGeom = () => geom = sel.val();
+    sel.on('change', _updateGeom);
+    _updateGeom();
 
     window.addEventListener('beforeunload', () => lastBox.set(box.geom));
 
