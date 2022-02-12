@@ -130,25 +130,26 @@ const IMAGE_URL = '/data/birman.jpg',
 
 class ExtractSquareGrid {
 
-    async extractFromAndSave(img, box) {
-        var json = await(this.extractFrom(img, box));
+    async extractFromAndSave(img, box, geom) {
+        var json = await(this.extractFrom(img, box, geom));
         const fs = require('fs');
         fs.writeFileSync(GRID_OUTPUT_FILENAME, JSON.stringify(json));
     }
 
-    async extractFrom(img, box) {
+    async extractFrom(img, box, geom) {
         var txt = this.squares(IMAGE_FILENAME,
-            await esg.imageBoundingBox(box.geom, img));
+            await esg.imageBoundingBox(box.geom, img),
+            geom);
         console.log(txt);
         return eval('(' + txt.replace(/#.*/g, '') + ')');  // not quite JSON :/
     }
 
-    squares(filename, boxGeom, geom) {
+    squares(filename, box_, geom_) {
         const child_process = require('child_process'),
-              box = boxGeom ? [`--box=${boxGeom.x},${boxGeom.y}:${boxGeom.w}x${boxGeom.h}`] : [],
-              gm = geom ? [`--geom=${geom}`] : [];
+              box = box_ ? [`--box=${box_.x},${box_.y}:${box_.w}x${box_.h}`] : [],
+              geom = geom_ ? [`--geom=${geom_}`] : [];
         var res = child_process.spawnSync('python',
-            ['cropper/squares.py', filename, ...box, ...gm], {encoding: 'utf-8'});
+            ['cropper/squares.py', filename, ...box, ...geom], {encoding: 'utf-8'});
         if (res.status != 0)
             throw new Error(res.stderr);
         else

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "./crossword.app/Contents/MacOS/nwjs .&",
-    "build": "kremlin src/cropper/index.html"
+    "build": "kremlin cropper/index.html"
   },
   "dependencies": {
     "express": "^4.17.1",
