@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crossword Puzzle</title>
+        <script src="src/main.ts"></script>
+    </head>
+    <body>
+        <div class="crossword-area">
+            <div id="crossword"></div>
+
+            <button id="reload">Reload</button>
+            <button id="import">Import</button>
+            <button id="clear">Clear</button>
+            <button id="download">Download</button>
+        </div>
+        <div class="hints"></div>      
+    </body>
+    <script>var k = kremlin.plug({window, main: ['index.html', 'src/cropper/cropper.html']});</script>
+</html>

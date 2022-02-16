@@ -1,7 +1,7 @@
 {
   "name": "crossword",
   "version": "0.0.1",
-  "main": "crossword.html",
+  "main": "build/kremlin/index.html",
   "window": {
     "title": "Crossword Puzzle"
   },
@@ -12,9 +12,13 @@
   "dependencies": {
     "express": "^4.17.1",
     "jquery": "^3.5.0",
-    "jquery-ui-dist": "^1.12.1"
+    "jquery-ui-dist": "^1.12.1",
+    "vue": "^3.2.29"
   },
   "app": {
     "icon": "img/Icon.icns"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.18"
   }
 }
