@@ -21,26 +21,35 @@ class CrosswordGrid {
                 assert(at);
                 if (cell === 'x') at.blocked = true;
                 else at.label = '' + cell;
-                var content = userdata?.[+i - 1]?.[+j - 1];
-                if (content) at.content = content;
+            }
+        }
+        for (let [i, vs] of Object.entries(userdata ?? {})) {
+            if (!+i) continue;
+            for (let [j, cell] of Object.entries(vs)) {
+                if (cell) {
+                    var at = this.get(+i, +j);
+                    assert(at);
+                    at.content = cell;
+                }
             }
         }
         return this;
     }
 
     toJson(content = this.content): CrosswordGrid.Json {
-        console.log(content.map(vs => vs[12].content));
+        var $ = {nrows: this.content.length, ncols: this.content[0].length};
         return {
-            cwdata: Object.fromEntries(
+            cwdata: {$, ...Object.fromEntries(
                 content.map((vs, i) =>
-                    [i, Object.fromEntries(
-                        vs.map((cell, j) => [j, cell.blocked ? 'x' : cell.label])
+                    [i + 1, Object.fromEntries(
+                        vs.map((cell, j) => [j + 1, cell.blocked ? 'x' : cell.label])
                             .filter(x => x[1]))])
-                .filter(x => !isEmpty(x[1]))),
+                .filter(x => !isEmpty(x[1])))
+            },
             userdata: Object.fromEntries(
                 content.map((vs, i) =>
-                    [i, Object.fromEntries(
-                        vs.map((cell, j) => [j, cell.content])
+                    [i + 1, Object.fromEntries(
+                        vs.map((cell, j) => [j + 1, cell.content])
                             .filter(x => x[1]))])
                 .filter(x => !isEmpty(x[1]))),
         }
