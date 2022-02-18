@@ -6,7 +6,7 @@ import CrosswordWidget from './components/crossword.vue';
 
 import './hints.ls';
 import './main.css';
-import * as server from './web-server';
+import * as server from './net/web-server';
 
 
 function reify<T>(): <S>(s: S) => S & T {
