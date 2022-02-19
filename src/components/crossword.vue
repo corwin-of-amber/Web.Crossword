@@ -3,7 +3,7 @@
         <tr v-for="row,$i in grid" :key="keyOf(row, $i)">
             <td v-for="cell,$j in cellsOf(row)" :key="$j" 
                     :class="{black: cell.blocked, highlit: highlit([$i, $j])}"
-                    @dblclick="toggleDir([$i, $j])">
+                    @click="setFocusP" @dblclick="toggleDir([$i, $j])">
                 <i v-if="cell.label">{{cell.label}}</i>
                 <p :ref="registerInput([$i,$j])" @focus="cellFocus([$i, $j])"
                     @keypress="clear" @input="cellInput([$i,$j], $event)"
@@ -27,6 +27,10 @@ export default {
             for (let row of this.grid)
                 for (let cell of row)
                     cell.content = undefined;
+        },
+        setFocusP(ev) {
+            var p = ev.target.querySelector('* p');
+            if (p) p.focus();
         },
         registerInput(at) { return (el) => this._p[at] = el; },
         highlit(at) {
@@ -151,5 +155,6 @@ td p {
     outline: none !important;
     user-select: none;  /* for good measure, but right now has no effect with `user-modify` */
     direction: rtl;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 </style>
