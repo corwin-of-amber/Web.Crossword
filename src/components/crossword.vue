@@ -23,6 +23,11 @@ export default {
         keyOf(row, index) { return index; },
         cellsOf(row) { return row; },
         clear(ev) { ev.target.textContent = ''; },
+        clearAll() {
+            for (let row of this.grid)
+                for (let cell of row)
+                    cell.content = undefined;
+        },
         registerInput(at) { return (el) => this._p[at] = el; },
         highlit(at) {
             var eq = (p1, p2) => (p1[0] == p2[0] && p1[1] == p2[1]);

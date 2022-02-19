@@ -10,7 +10,7 @@ class CrosswordGrid {
     }
 
     get(i: number, j: number) {
-        return this.content[i - 1][j - 1];
+        return this.content[i - 1]?.[j - 1];
     }
 
     fromJson({cwdata, userdata}: CrosswordGrid.Json) {
@@ -19,6 +19,7 @@ class CrosswordGrid {
             for (let [j, cell] of Object.entries(vs)) {
                 var at = this.get(+i, +j);
                 assert(at);
+                //if (!at) continue;  /* out of bounds -- must be some leftovers */
                 if (cell === 'x') at.blocked = true;
                 else at.label = '' + cell;
             }
@@ -28,7 +29,7 @@ class CrosswordGrid {
             for (let [j, cell] of Object.entries(vs)) {
                 if (cell) {
                     var at = this.get(+i, +j);
-                    assert(at);
+                    if (!at) continue;  /* out of bounds -- must be some leftovers */
                     at.content = cell;
                 }
             }
