@@ -149,7 +149,7 @@ class ExtractSquareGrid {
               box = box_ ? [`--box=${box_.x},${box_.y}:${box_.w}x${box_.h}`] : [],
               geom = geom_ ? [`--geom=${geom_}`] : [];
         var res = child_process.spawnSync('python',
-            ['cropper/squares.py', filename, ...box, ...geom], {encoding: 'utf-8'});
+            ['src/cropper/squares.py', filename, ...box, ...geom], {encoding: 'utf-8'});
         if (res.status != 0)
             throw new Error(res.stderr);
         else

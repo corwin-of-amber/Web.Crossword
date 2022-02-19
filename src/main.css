@@ -1,0 +1,16 @@
+html { height: 100%; }
+
+body {
+    margin: 0; display: flex; align-items: stretch; height: 100%; 
+}
+
+div.crossword-area {
+    padding: 6px;
+}
+
+div.hints {
+    background: url(/data/birman.jpg);
+    background-repeat: no-repeat;
+    flex: 1;
+    opacity: 0;
+}
