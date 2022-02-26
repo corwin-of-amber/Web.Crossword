@@ -13,8 +13,12 @@
             <button id="import">Import</button>
             <button id="clear">Clear</button>
             <button id="download">Download</button>
+            <button id="collab">Collab</button>
+            <span id="collab-status"></span>
         </div>
         <div class="hints"></div>      
     </body>
-    <script>var k = kremlin.plug({window, main: ['index.html', 'src/cropper/cropper.html']});</script>
+
+    <!-- @kremlin.plug -->
+    <script>k?.config({main: ['index.html', 'src/cropper/cropper.html']});</script>
 </html>

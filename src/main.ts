@@ -9,7 +9,7 @@ import './main.css';
 import * as server from './net/web-server';
 import * as archive from './archive';
 
-import { main as mainP2P, createEntanglement } from './net/p2p';
+import { main as mainP2P } from './net/p2p';
 
 
 function reify<T>(): <S>(s: S) => S & T {
@@ -51,20 +51,17 @@ async function main() {
     $('#import').on('click', () => window.open('/build/kremlin/cropper.html', 'cropper'));
     $('#clear').on('click', () => app.clearAll());
     $('#download').on('click', () => archive.download(cw));
+    $('#collab').on('click', () => p2pCollab());
 
     // HTTP
     if (window.location.protocol != 'http:')
         server.start();
 
     // P2P
-    (async () => {
-        var { c1 } = await mainP2P(),
-            sp = new URLSearchParams(window.location.search);
-        c1.sync.docs.createDoc('tab1');
-
-        createEntanglement(c1.sync.path('tab1'), app,
-            sp.get('id') || 'master');
-    }); //();
+    const p2pCollab = (async () => {
+        var { c1 } = mainP2P(app,
+            s => $('#collab-status').text(s));
+    });
 
     Object.assign(window, { app, cw, server });
 }

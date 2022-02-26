@@ -82,6 +82,11 @@ class AutomergeMimic<T extends object> extends Mimic<T> {
                 d[objectId][key] = [toId];
             });
         }
+        else if (typeof value === 'undefined') {
+            this._change(d => {
+                d[objectId][key] = [];
+            });
+        }
         else {
             this._change(d => {
                 d[objectId][key] = value;
@@ -180,7 +185,6 @@ class AutomergeMimic<T extends object> extends Mimic<T> {
         switch (value.type) {
         case 'list':  /* indicates an internal reference */
             try {
-                console.log(doc, value.objectId);
                 return this._deref(Automerge.getObjectById(doc, value.objectId) as Ref);
             }
             catch (e) { console.warn(`cannot deref ${value.objectId};`, e); break; }
@@ -192,8 +196,8 @@ class AutomergeMimic<T extends object> extends Mimic<T> {
     }
 
     _deref(value: Ref | Atom) {
-        if (Array.isArray(value)) return this._byKey.get(value[0]);
-        else return value;
+        return Array.isArray(value) ?
+            value[0] && this._byKey.get(value[0]) : value;
     }
 
     _asObject(value: any) {
